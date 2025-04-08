@@ -1,0 +1,9 @@
+\documentclass[preview]{standalone}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\begin{align*}
+v(s) \leftarrow \max_{a \in \mathcal{A}} \left(\mathcal{R}_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{ss'}^a v_{\text{prev}}(s')\right)
+\end{align*}
+\end{document}

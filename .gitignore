@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+
+# Distribution / packaging
+build/
+dist/
+*.egg
+*.egg-info/
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+
+# Translations
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+env/
+venv/
+virtualenv/
+
+# IDE settings
+.idea/
+.spyderproject
+.spyproject
+.ropeproject
+
+# Other
+.DS_Store
+__pycache__/
