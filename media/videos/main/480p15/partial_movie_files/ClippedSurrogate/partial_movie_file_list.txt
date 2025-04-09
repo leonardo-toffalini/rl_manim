@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/ClippedSurrogate/1185818338_2306714922_223132457.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/ClippedSurrogate/624642324_2808414604_3535984219.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/ClippedSurrogate/624642324_1141282389_1317159259.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/ClippedSurrogate/624642324_3191500082_3862723274.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/ClippedSurrogate/624642324_255102487_2536261726.mp4'

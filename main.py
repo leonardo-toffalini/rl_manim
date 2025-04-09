@@ -208,3 +208,86 @@ class PolicyGradientTheorem(Scene):
         self.wait(5)
 
 
+class BaselineFunction(Scene):
+    def construct(self):
+        title = Title("Baseline function")
+        self.play(Write(title))
+
+        text1 = Tex(r"We can reduce variance by introducing a \textbf{baseline} function $B(s)$", font_size=36)
+        eq = MathTex(r"\nabla_{\theta}J(\theta) = \mathbb{E}_{\pi_{\theta}} [\nabla_{\theta}\log \pi_{\theta}(s, a) \cdot (Q^{\pi_{\theta}}(s, a) - B(s))]", font_size=36)
+        text2 = Tex(r"A good choice for the baseline function is the value function $B(s) = V^{\pi_{\theta}}(s)$", font_size=36)
+
+        texts = VGroup(text1, eq, text2).arrange(DOWN, aligned_edge=LEFT, buff=1)
+        eq.shift(2 * RIGHT)
+        self.play(Write(texts))
+        self.wait(5)
+
+
+class AdvantageFunction(Scene):
+    def construct(self):
+        title = Title("Advantage function")
+        self.play(Write(title))
+
+        text1 = Tex(r"We call the following the \textbf{advantage function}:", font_size=36)
+        eq1 = MathTex(r"A^{\pi_{\theta}}(s, a) = Q^{\pi_{\theta}}(s, a) - V^{\pi_{\theta}}(s)", font_size=36)
+        text2 = Tex(r"The policy gradient theorem with the advantage function:", font_size=36)
+        eq2 = MathTex(r"\nabla_{\theta}J(\theta) = \mathbb{E}_{\pi_{\theta}} [\nabla_{\theta}\log \pi_{\theta}(s, a) \cdot A^{\pi_{\theta}}(s, a)]", font_size=36)
+
+        texts = VGroup(text1, eq1, text2, eq2).arrange(DOWN, aligned_edge=LEFT, buff=1)
+        eq1.shift(2 * RIGHT)
+        eq2.shift(1.5 * RIGHT)
+        self.play(Write(texts))
+        self.wait(5)
+
+class EstimatingAdvantage(Scene):
+    def construct(self):
+        title = Title("Estimating the advantage function")
+        self.play(Write(title))
+
+        text1 = Tex(r"By the Bellman expectation equation, we can rewrite $Q$:", font_size=36)
+        eq1 = MathTex(r"Q^{\pi_{\theta}}(s, a) = \mathbb{E}[G_{t} \mid s, a] = \mathbb{E}_{\pi_{\theta}} [r + \gamma V^{\pi_{\theta}}(s') \mid s, a]", font_size=36)
+        eq2 = MathTex(r"A^{\pi_{\theta}}(s, a) = \mathbb{E}_{\pi_{\theta}} [r + \gamma V^{\pi_{\theta}}(s') \mid s, a] - V^{\pi_{\theta}}(s)", font_size=36)
+        text2 = Tex(r"The \textbf{TD Error} represents the error of a single step:", font_size=36)
+        eq3 = MathTex(r"\delta ^{\pi_{\theta}} = r + \gamma V^{\pi_{\theta}}(s') - V^{\pi_{\theta}}(s)", font_size=36)
+        eq4 = MathTex(r"\mathbb{E}_{\pi_{\theta}}[\delta ^{\pi_{\theta}} \mid s, a] = A^{\pi_{\theta}}(s, a)", font_size=36)
+        text3 = Tex(r"The TD Error is an unbiased estimator of the advantage function.", font_size=36)
+
+        texts = VGroup(text1, eq1, eq2, text2, eq3, eq4, text3).arrange(DOWN, aligned_edge=LEFT)
+        eq1.shift(1.5 * RIGHT)
+        eq2.shift(1.5 * RIGHT)
+        eq3.shift(2 * RIGHT)
+        eq4.shift(2 * RIGHT)
+        self.play(Write(texts))
+        self.wait(5)
+
+class GAE(Scene):
+    def construct(self):
+        title = Title("Generalized Advantage Estimator (GAE)")
+        self.play(Write(title))
+
+        text1 = Tex(r"A single step TD Error may result in high variance, thus we introduce the following:", font_size=36)
+        eq1 = MathTex(r"A^{(k)}_{t} = \sum_{m=0} ^{k-1} \gamma ^{m} \delta ^{\pi_{\theta}}_{t+1} = -V^{\pi_{\theta}}(s_{t}) + r_{t} + \gamma r_{t+1} + \gamma ^{2}r_{t+2} + \dots + \gamma ^{k}V^{\pi_{\theta}}(s_{t+k})", font_size=36)
+        text2 = Tex(r"As $k$ increases, the variance decreases.", font_size=36)
+        text3 = Tex(r"\textbf{GAE} is the exponentially weightet sum of these estimates:", font_size=36)
+        eq2 = MathTex(r"A^{\text{GAE}}_{t} = (1 - \lambda)\left(A^{(1)}_{t} + \lambda A^{(2)}_{t} + \lambda ^{2}A^{(3)}_{t} + \dots\right)", font_size=36)
+
+        texts = VGroup(text1, eq1, text2, text3, eq2).arrange(DOWN, aligned_edge=LEFT)
+        eq2.shift(1.5 * RIGHT)
+        self.play(Write(texts))
+        self.wait(5)
+
+class ClippedSurrogate(Scene):
+    def construct(self):
+        title = Title("Clipped surrogate objective")
+        self.play(Write(title))
+
+        image = ImageMobject("images/clipped_loss.jpg")
+        image.set(width=8)
+        image.shift(DOWN)
+
+        eq = MathTex(r"L^{\text{CLIP}}(\theta)=\hat{\mathbb{E}}_t\left[\min \left(r_t(\theta) \hat{A}_t, \operatorname{clip}\left(r_t(\theta), 1-\epsilon, 1+\epsilon\right) \hat{A}_t\right)\right]", font_size=36)
+
+        self.play(Write(eq))
+        self.wait(2)
+        self.play(eq.animate.shift(2 * UP), FadeIn(image))
+        self.wait(5)

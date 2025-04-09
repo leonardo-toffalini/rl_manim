@@ -1,0 +1,9 @@
+\documentclass[preview]{standalone}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+\begin{align*}
+A^{(k)}_{t} = \sum_{m=0} ^{k-1} \gamma ^{m} \delta ^{\pi_{\theta}}_{t+1} = -V^{\pi_{\theta}}(s_{t}) + r_{t} + \gamma r_{t+1} + \gamma ^{2}r_{t+2} + \dots + \gamma ^{k}V^{\pi_{\theta}}(s_{t+k})
+\end{align*}
+\end{document}
