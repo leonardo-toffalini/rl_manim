@@ -47,14 +47,14 @@ class ValueIteration(Scene):
         
         lines = [
             MathTex(r"\Delta \gets \infty", font_size=36),
-            Tex(r"While $\Delta > \theta$", font_size=36),
-            Tex(r"For $s \in S$", font_size=36),
+            Tex(r"\textbf{while} $\Delta > \theta$ \textbf{do}", font_size=36),
+            Tex(r"\textbf{for} $s \in S$ \textbf{do}", font_size=36),
             MathTex(r"\Delta \leftarrow 0", font_size=36),
             MathTex(r"v_{\text{prev}} \leftarrow v", font_size=36),
             MathTex(r"v(s) \leftarrow \max_{a \in \mathcal{A}} \left(\mathcal{R}_s^a + \gamma \sum_{s' \in \mathcal{S}} \mathcal{P}_{ss'}^a v_{\text{prev}}(s')\right)", font_size=36),
             MathTex(r"\Delta \gets \max \{ \Delta,\; \lvert v - v_{\text{prev}} \rvert \}", font_size=36),
-            Tex(r"end for", font_size=36),
-            Tex(r"end while", font_size=36)
+            Tex(r"\textbf{end} \textbf{for}", font_size=36),
+            Tex(r"\textbf{end} \textbf{while}", font_size=36),
         ]
         
         # Group and arrange all lines vertically with left alignment
@@ -86,18 +86,18 @@ class QLearning(Scene):
         self.play(Write(title))
         
         lines = [
-            Tex(r"for $i \gets 1$, num episodes do", font_size=32),
+            Tex(r"\textbf{for} $i \gets 1$, num episodes \textbf{do}", font_size=32),
             Tex(r"$\varepsilon \gets \varepsilon_1$", font_size=32),
             Tex(r"Observe $S_0$", font_size=32),
             Tex(r"$t \gets 0$", font_size=32),
-            Tex(r"repeat", font_size=32),
+            Tex(r"\textbf{repeat}", font_size=32),
             Tex(r"Choose action $A_t$ using policy derived from $Q$", font_size=32),
             Tex(r"Take action $A_t$ and observe the reward and state that follows, $R_{t+1}, S_{t+1}$", font_size=32),
             Tex(r"$Q(S_t, A_t) \gets (1 - \alpha) Q(S_t, A_t) + \alpha (R_{t+1} + \gamma \max_{a} Q(S_{t+1}, a))$", font_size=32),
             Tex(r"$t \gets t + 1$", font_size=32),
-            Tex(r"until $S_t$ is terminal", font_size=32),
-            Tex(r"end for", font_size=32),
-            Tex(r"return $Q$", font_size=32)
+            Tex(r"\textbf{until} $S_t$ is terminal", font_size=32),
+            Tex(r"\textbf{end} \textbf{for}", font_size=32),
+            Tex(r"\textbf{return} $Q$", font_size=32)
         ]
         
         # Group and arrange all lines vertically with left alignment
@@ -198,7 +198,7 @@ class PolicyGradientTheorem(Scene):
         text1 = Tex(r"For any differentiable policy $\pi_{\theta}$, for any policy objective function $J$, the policy gradient is the following:", font_size=36)
         eq = MathTex(r"\nabla_{\theta}J(\theta) = \mathbb{E}_{\pi_{\theta}} [\nabla_{\theta}\log \pi_{\theta}(s, a) \cdot Q^{\pi_{\theta}}(s, a)]", font_size=36)
         text2 = Tex(r"where $Q^{\pi_{\theta}}(s, a)$ is the long-term value of a state action pair.", font_size=36)
-        thm = VGroup(text1, eq, text2).arrange(DOWN, aligned_edge=LEFT)
+        thm = VGroup(text1, eq, text2).arrange(DOWN, aligned_edge=LEFT, buff=1)
         eq.shift(3 * RIGHT)
 
         self.play(Write(thm))
@@ -265,9 +265,9 @@ class GAE(Scene):
         title = Title("Generalized Advantage Estimator (GAE)")
         self.play(Write(title))
 
-        text1 = Tex(r"A single step TD Error may result in high variance, thus we introduce the following:", font_size=36)
+        text1 = Tex(r"A single step TD Error may result in high bias, thus we introduce the following:", font_size=36)
         eq1 = MathTex(r"A^{(k)}_{t} = \sum_{m=0} ^{k-1} \gamma ^{m} \delta ^{\pi_{\theta}}_{t+1} = -V^{\pi_{\theta}}(s_{t}) + r_{t} + \gamma r_{t+1} + \gamma ^{2}r_{t+2} + \dots + \gamma ^{k}V^{\pi_{\theta}}(s_{t+k})", font_size=36)
-        text2 = Tex(r"As $k$ increases, the variance decreases.", font_size=36)
+        text2 = Tex(r"As $k$ increases, the bias decreases, but the variance increases.", font_size=36)
         text3 = Tex(r"\textbf{GAE} is the exponentially weightet sum of these estimates:", font_size=36)
         eq2 = MathTex(r"A^{\text{GAE}}_{t} = (1 - \lambda)\left(A^{(1)}_{t} + \lambda A^{(2)}_{t} + \lambda ^{2}A^{(3)}_{t} + \dots\right)", font_size=36)
 
@@ -291,3 +291,41 @@ class ClippedSurrogate(Scene):
         self.wait(2)
         self.play(eq.animate.shift(2 * UP), FadeIn(image))
         self.wait(5)
+
+class PPO(Scene):
+    def construct(self):
+        title = Title(r"Proximal Policy Optimization (PPO)")
+        self.play(Write(title))
+        
+        lines = [
+            Tex(r"\textbf{for} iteration $=1, 2, \ldots$ \textbf{do}", font_size=36),
+            Tex(r"\textbf{for} actor $=1, 2, \ldots, N$ \textbf{do}", font_size=36),
+            Tex(r"Run policy $\pi_{\theta_{\text{old}}}$ in environment for $T$ timesteps", font_size=36),
+            Tex(r"Compute advantage estimates $A_1, \ldots, A_T$", font_size=36),
+            Tex(r"\textbf{end} \textbf{for}", font_size=36),
+            Tex(r"Optimize surrogate $L$ wrt $\theta$, with $K$ epochs and minibatch size $M \le NT$", font_size=36),
+            Tex(r"$\theta_{\text{old}} \gets \theta$", font_size=36),
+            Tex(r"\textbf{end} \textbf{for}", font_size=36),
+        ]
+        
+        algorithm_group = VGroup(*lines).arrange(DOWN, aligned_edge=LEFT).shift(0.5 * DOWN)
+
+        tab_size = 0.7 * RIGHT
+        for line in lines[1:-1]:
+            line.shift(tab_size)
+        for line in lines[2:4]:
+            line.shift(tab_size)
+        
+        for i, line in enumerate(lines):
+            self.play(Write(line), run_time=1)
+            self.wait(1)
+
+class PPOBehemoth(Scene):
+    def construct(self):
+        image = ImageMobject("images/behemoth_ppo.jpg")
+        image.set(width=13)
+        image.shift(5 * DOWN)
+
+        self.add(image)
+        self.wait(2)
+        self.play(image.animate.shift(10 * UP), run_time=20)
