@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/PolicyGradientTheorem/1185818338_811155031_223132457.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/PolicyGradientTheorem/624642324_2945706824_1316409369.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/PolicyGradientTheorem/624642324_1141282389_330509044.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/PolicyGradientTheorem/624642324_4241783206_179338013.mp4'
+file 'file:/Users/leonardotoffalini/Downloads/git/personal/rl_manim/media/videos/main/480p15/partial_movie_files/PolicyGradientTheorem/624642324_255102487_1674232960.mp4'
